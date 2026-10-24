@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hannan & Madiha - Our Eternal Love Story 💍</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & N Nastaliq Urdu style -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0b0b0b 0%, #1a0f14 50%, #2a0815 100%);
+            color: #fce7f3;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .urdu-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl;
+        }
+        .cinzel-font {
+            font-family: 'Cinzel', serif;
+        }
+        /* Custom Rose Petal Falling Animation */
+        .petal {
+            position: fixed;
+            top: -10%;
+            z-index: 10;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(100px) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(20, 10, 15, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        /* Glow effects */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(244, 63, 94, 0.6), 0 0 40px rgba(236, 72, 153, 0.4);
+        }
+        .glow-box {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #be185d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative">
+
+    <!-- Falling Rose Petals Container -->
+    <div id="petals-container" class="absolute inset-0 overflow-hidden pointer-events-none z-10"></div>
+
+    <!-- Background Qawwali Audio -->
+    <!-- Note: Embedded base64 audio placeholder or fallback loop synthesized/streamed seamlessly -->
+    <audio id="bg-qawwali" loop preload="auto">
+        <!-- Using a reliable royalty-free romantic ambience / qawwali audio stream fallback -->
+        <source src="https://actions.google.com/sounds/v1/ambiences/romantic_restaurant.ogg" type="audio/ogg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-love-story-112154.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Floating Audio Control & Language Toggle Bar -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <!-- Language Toggle Button -->
+        <button id="lang-toggle-btn" class="bg-pink-900/80 hover:bg-pink-700 text-white px-4 py-2 rounded-full font-semibold border border-pink-500/50 backdrop-blur-md shadow-lg transition-all flex items-center gap-2 text-sm">
+            <i class="fa-solid fa-language"></i> <span id="lang-text">اردو / English</span>
+        </button>
+
+        <!-- Audio Control Button -->
+        <button id="audio-toggle-btn" class="bg-pink-600 hover:bg-pink-500 text-white w-11 h-11 rounded-full shadow-lg border border-pink-400 flex items-center justify-center transition-all animate-pulse" title="Play/Pause Qawwali">
+            <i id="audio-icon" class="fa-solid fa-music"></i>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto px-4 py-12 relative z-20">
+
+        <!-- 1. Top Header & Logo -->
+        <header class="text-center mb-12 glass-card rounded-3xl p-8 glow-box relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-48 h-48 bg-pink-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-16 -bottom-16 w-48 h-48 bg-rose-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex justify-center mb-4">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-pink-600 to-rose-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+                    <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-2 border-pink-500/50 shadow-2xl bg-black">
+                        <!-- Custom Infinity Logo -->
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80" 
+                             onerror="this.src='https://placehold.co/400x400/1a0f14/ff758c?text=H+%26+M'" 
+                             alt="Hannan & Madiha Logo" 
+                             class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="cinzel-font text-3xl md:text-5xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500 mb-2 glow-text">
+                Hannan & Madiha
+            </h1>
+            <p class="text-pink-300/90 text-sm md:text-base font-medium tracking-wide uppercase">
+                Bound by Destiny. United by Heart. Since 2022. 💍✨
+            </p>
+        </header>
+
+        <!-- Live Love Counter Section -->
+        <section class="glass-card rounded-3xl p-6 md:p-8 mb-12 text-center glow-box">
+            <h3 class="text-pink-400 text-lg md:text-xl font-semibold mb-6 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-rose-500"></i> 
+                <span data-en="Time We've Been Together Since Nov 21, 2022" data-ur="21 نومبر 2022 سے ہمارا ساتھ">Time We've Been Together Since Nov 21, 2022</span>
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+                <div class="bg-black/40 border border-pink-500/30 rounded-2xl p-4 shadow-inner">
+                    <span id="days" class="block text-3xl md:text-4xl font-bold text-pink-300 cinzel-font">0</span>
+                    <span class="text-xs text-pink-400/80 uppercase tracking-widest mt-1 block" data-en="Days" data-ur="دن">Days</span>
+                </div>
+                <div class="bg-black/40 border border-pink-500/30 rounded-2xl p-4 shadow-inner">
+                    <span id="hours" class="block text-3xl md:text-4xl font-bold text-pink-300 cinzel-font">0</span>
+                    <span class="text-xs text-pink-400/80 uppercase tracking-widest mt-1 block" data-en="Hours" data-ur="گھنٹے">Hours</span>
+                </div>
+                <div class="bg-black/40 border border-pink-500/30 rounded-2xl p-4 shadow-inner">
+                    <span id="minutes" class="block text-3xl md:text-4xl font-bold text-pink-300 cinzel-font">0</span>
+                    <span class="text-xs text-pink-400/80 uppercase tracking-widest mt-1 block" data-en="Minutes" data-ur="منٹ">Minutes</span>
+                </div>
+                <div class="bg-black/40 border border-pink-500/30 rounded-2xl p-4 shadow-inner">
+                    <span id="seconds" class="block text-3xl md:text-4xl font-bold text-pink-300 cinzel-font animate-pulse">0</span>
+                    <span class="text-xs text-pink-400/80 uppercase tracking-widest mt-1 block" data-en="Seconds" data-ur="سیکنڈ">Seconds</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Romantic English Paragraph with Emojis -->
+        <section class="glass-card rounded-3xl p-8 mb-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-6 opacity-10 text-pink-500 text-8xl pointer-events-none">
+                <i class="fa-solid fa-quote-right"></i>
+            </div>
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-6 text-center border-b border-pink-500/20 pb-4">
+                Our Eternal Vows 🌹
+            </h2>
+            <div class="space-y-4 text-base md:text-lg leading-relaxed text-pink-100/90 text-center font-light">
+                <p>From the very first moment our paths crossed, my entire world changed into something truly magical and bright ✨💖</p>
+                <p>You are not just my love, you are my soulmate, my ultimate peace, and the absolute queen of my heart 👑❤️</p>
+                <p>Every single beat of my heart whispers your name with a deep, endless, and unbreakable devotion 💓🌹</p>
+                <p>Even when the world is noisy and chaotic, your sweet smile remains my safest and happiest sanctuary 🌸✨</p>
+                <div class="p-4 bg-pink-950/40 border-l-4 border-rose-500 rounded-r-2xl my-4 text-rose-200 font-medium italic shadow-lg">
+                    Whenever I hold you in my arms and hug you tight, all my worries vanish and my heart finds its true peace 🫂🤍
+                </div>
+                <p>I promise to stand by your side through every storm, holding your hand forever and always 🤝💫</p>
+                <p>You are the most precious blessing of my life, and I cherish every single second I get to spend loving you 🕰️💖</p>
+                <p>No distance or time could ever weaken the pure and profound bond we share between our souls 🌌🕊️</p>
+                <p>You are my today, my tomorrow, and my absolute forever until the very end of time 💍🌟</p>
+                <p class="font-semibold text-pink-300 pt-2">I love you more than words could ever express, my sweet wife, my life, and my everything ❤️‍🔥🦋</p>
+            </div>
+        </section>
+
+        <!-- Mystery Gift Box 1 (Childhood Memory Reveal) -->
+        <section class="glass-card rounded-3xl p-8 mb-12 text-center glow-box">
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-4">
+                🎁 Mystery Gift Box #1: A Precious Memory 🎁
+            </h2>
+            <p class="text-pink-200/80 mb-6 text-sm">Tap the gift boxes below to unpack the layers and reveal a magical surprise from our childhood!</p>
+            
+            <div id="gift-container" class="max-w-md mx-auto bg-black/50 border border-pink-500/40 rounded-2xl p-8 cursor-pointer hover:border-pink-400 transition-all shadow-2xl relative group">
+                <!-- Layer 1: Wrapped Gift Box -->
+                <div id="gift-layer-1" class="flex flex-col items-center py-8">
+                    <div class="text-7xl mb-4 group-hover:scale-110 transition duration-300 animate-bounce">🎁</div>
+                    <span class="text-pink-300 font-semibold text-lg">Click to Open Gift Box!</span>
+                    <span class="text-xs text-pink-400/60 mt-1">Something special is waiting inside...</span>
+                </div>
+
+                <!-- Layer 2: Inner Box (Hidden Initially) -->
+                <div id="gift-layer-2" class="hidden flex-col items-center py-8 animate-fade-in">
+                    <div class="text-7xl mb-4 text-rose-400 animate-pulse">🎀📦</div>
+                    <span class="text-pink-300 font-semibold text-lg">One More Layer! Open Again...</span>
+                    <span class="text-xs text-pink-400/60 mt-1">You are almost there, my love!</span>
+                </div>
+
+                <!-- Layer 3: Final Photo Reveal (Hidden Initially) -->
+                <div id="gift-layer-3" class="hidden flex-col items-center py-4 animate-fade-in">
+                    <div class="rounded-xl overflow-hidden border-2 border-pink-400 shadow-2xl mb-4 w-full">
+                        <img src="https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=600&q=80" 
+                             onerror="this.src='https://placehold.co/600x400/1a0f14/ff758c?text=Childhood+Memory'" 
+                             alt="Childhood Memory" 
+                             class="w-full h-64 object-cover">
+                    </div>
+                    <h4 class="text-lg font-bold text-pink-300 cinzel-font">Our Precious Childhood Days 🤍</h4>
+                    <p class="text-xs text-pink-400/80 mt-1">Preserved with true identity and endless love.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="glass-card rounded-3xl p-8 mb-12">
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-8 text-center">
+                ✨ Our Love Story Timeline ✨
+            </h2>
+            <div class="relative pl-6 border-l-2 border-pink-500/50 space-y-8">
+                <!-- Milestone 1 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
+                    <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">21 November 2022</span>
+                    <h4 class="text-lg font-bold text-pink-200 mt-1">The Magical Beginning ✨💌</h4>
+                    <p class="text-sm text-pink-300/80 mt-1">That unforgettable day when our paths crossed for the very first time, and a simple conversation changed my entire world forever.</p>
+                </div>
+                <!-- Milestone 2 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
+                    <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">Growing Closer</span>
+                    <h4 class="text-lg font-bold text-pink-200 mt-1">The Sweet Growing Bond 🌱🤍</h4>
+                    <p class="text-sm text-pink-300/80 mt-1">Every single day after that first hello brought us closer, turning casual talks into deep conversations, shared dreams, and an unbreakable emotional connection.</p>
+                </div>
+                <!-- Milestone 3 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
+                    <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">Peace & Warmth</span>
+                    <h4 class="text-lg font-bold text-pink-200 mt-1">The Safest Sanctuary 🫂🌸</h4>
+                    <p class="text-sm text-pink-300/80 mt-1">Discovering that no matter how chaotic the world gets, holding you in my arms and hugging you tight brings ultimate peace to my heart.</p>
+                </div>
+                <!-- Milestone 4 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
+                    <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">Forever Destiny</span>
+                    <h4 class="text-lg font-bold text-pink-200 mt-1">My Forever Wife & My True Destiny 💍👑</h4>
+                    <p class="text-sm text-pink-300/80 mt-1">Transitioning from lovers to soulmates, acknowledging you with all my heart as my wife, and vowing to cherish you for the rest of my life.</p>
+                </div>
+                <!-- Milestone 5 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-pink-500 border-4 border-black"></div>
+                    <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">Infinity & Beyond</span>
+                    <h4 class="text-lg font-bold text-pink-200 mt-1">Today and Forever Ahead 🌌✨</h4>
+                    <p class="text-sm text-pink-300/80 mt-1">Walking hand-in-hand through every storm and joy, writing our own eternal love story day by day until the end of time.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Photo & Video Gallery Section -->
+        <section class="mb-12">
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-8 text-center">
+                💖 Our Special Moments Gallery 💖
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Gallery Item 1: Churail -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-pink-500/30 group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
+                             onerror="this.src='https://placehold.co/600x600/1a0f14/ff758c?text=Churail'" 
+                             alt="Churail" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center bg-black/60">
+                        <h3 class="text-lg font-bold text-pink-300">ITS MY LOVELY CHURAIL 🧙‍♀️</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2: Chipkali -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-pink-500/30 group">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80" 
+                             onerror="this.src='https://placehold.co/600x600/1a0f14/ff758c?text=Chipkali'" 
+                             alt="Chipkali" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center bg-black/60">
+                        <h3 class="text-lg font-bold text-pink-300">ITS MY CHIPKALI 🦎</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3: Video 1 (Its my heart) -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-pink-500/30 group">
+                    <div class="h-80 overflow-hidden relative bg-black flex items-center justify-center">
+                        <video controls class="w-full h-full object-cover">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                    </div>
+                    <div class="p-5 text-center bg-black/60">
+                        <h3 class="text-lg font-bold text-pink-300">Its my heart 🤍</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4: Video 2 (Its my don dro) -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-pink-500/30 group">
+                    <div class="h-80 overflow-hidden relative bg-black flex items-center justify-center">
+                        <video controls class="w-full h-full object-cover">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                    </div>
+                    <div class="p-5 text-center bg-black/60">
+                        <h3 class="text-lg font-bold text-pink-300">Its my don dro 🔫</h3>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5: Photo 4 (Wife / Begum g) -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-pink-500/30 group md:col-span-2">
+                    <div class="h-96 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1000&q=80" 
+                             onerror="this.src='https://placehold.co/1000x600/1a0f14/ff758c?text=My+Wife'" 
+                             alt="My Wife" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-5 text-center bg-black/60">
+                        <h3 class="text-xl font-bold text-pink-300">ITS MY JAN MY WIFE MY BEGHAM G 🌹</h3>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Mystery Gift Box 2 (Website End Surprise Video) -->
+        <section class="glass-card rounded-3xl p-8 mb-12 text-center glow-box">
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-4" data-en="🎁 Final Mystery Gift Plan (End Surprise) 🎁" data-ur="🎁 آخری تحفہ اور سرپرائز 🎁">
+                🎁 Final Mystery Gift Plan (End Surprise) 🎁
+            </h2>
+            <p class="text-pink-200/80 mb-6 text-sm" data-en="Tap below to open the ultimate end-of-website mystery gift box!" data-ur="ویب سائٹ کے اس آخری تحفے کو کھولنے کے لیے یہاں کلک کریں!">Tap below to open the ultimate end-of-website mystery gift box!</p>
+
+            <div id="end-gift-box" class="max-w-xl mx-auto bg-black/50 border border-pink-500/40 rounded-2xl p-8 cursor-pointer hover:border-pink-400 transition-all shadow-2xl">
+                <div id="end-gift-wrapped" class="flex flex-col items-center py-6">
+                    <div class="text-7xl mb-4 animate-bounce">🎁💖</div>
+                    <span class="text-pink-300 font-semibold text-lg" data-en="Click to Reveal Final Surprise Video!" data-ur="آخری سرپرائز دیکھنے کے لیے کلک کریں!">Click to Reveal Final Surprise Video!</span>
+                </div>
+                <div id="end-gift-revealed" class="hidden flex-col items-center py-4">
+                    <div class="rounded-xl overflow-hidden border-2 border-pink-400 shadow-2xl mb-4 w-full bg-black">
+                        <video controls autoplay class="w-full h-72 object-cover">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                    </div>
+                    <h4 class="text-lg font-bold text-pink-300 cinzel-font" data-en="Our Eternal Bond Forever 💍✨" data-ur="ہمارا ابدی اور ہمیشہ کا رشتہ 💍✨">Our Eternal Bond Forever 💍✨</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Section: Contact Me / Send a Message to Your Heart -->
+        <section class="glass-card rounded-3xl p-8 mb-12 glow-box">
+            <h2 class="cinzel-font text-2xl font-bold text-pink-300 mb-3 text-center" data-en="Send a Message to Your Heart" data-ur="اپنے دل تک پیغام بھیجیں">
+                Send a Message to Your Heart
+            </h2>
+            <p class="text-center text-pink-200/80 text-sm mb-6" data-en="Your personal number: Your Heart 🤍" data-ur="آپ کا ذاتی نمبر: Your Heart 🤍">
+                Your personal number: Your Heart 🤍
+            </p>
+
+            <div class="max-w-xl mx-auto space-y-4">
+                <div>
+                    <label class="block text-pink-300 text-sm font-medium mb-2" data-en="Your Message" data-ur="آپ کا پیغام">Your Message</label>
+                    <textarea id="heart-message-input" rows="4" class="w-full bg-black/50 border border-pink-500/40 rounded-xl p-4 text-pink-100 placeholder-pink-400/40 focus:outline-none focus:border-pink-400 transition" placeholder="Write your lovely message here..."></textarea>
+                </div>
+                <button id="send-heart-btn" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300" data-en="Send to Your Heart" data-ur="دل تک بھیجیں">
+                    Send to Your Heart
+                </button>
+
+                <!-- Sweet Animated Toast / Popup -->
+                <div id="heart-toast" class="hidden mt-4 p-4 bg-pink-950/80 border border-rose-500 rounded-xl text-center text-rose-200 font-semibold shadow-xl animate-bounce">
+                    <span id="toast-text">Message sent in your heart! ❤️</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Dedication for Madiha -->
+        <section class="text-center mb-8 py-6 glass-card rounded-2xl border border-rose-500/40 glow-box">
+            <h3 class="cinzel-font text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-300 to-pink-500">
+                Madiha it is for you, my begam g ❤️
+            </h3>
+        </section>
+
+        <!-- Red & White Roses Bouquet Section -->
+        <section class="glass-card rounded-3xl p-8 mb-12 text-center border border-rose-500/30">
+            <h3 class="cinzel-font text-xl font-bold text-pink-300 mb-3" data-en="Eternal Bouquet for Hannan & Madiha" data-ur="حنان اور مدیحہ کے لیے پھولوں کا گلدستہ">
+                Eternal Bouquet for Hannan & Madiha
+            </h3>
+            <p class="text-xs text-pink-300/80 mb-6" data-en="Red Roses for Passionate Love & White Roses for Pure Souls" data-ur="سرخ گلاب سچی محبت کے لیے اور سفید گلاب پاکیزہ روح کے لیے">
+                Red Roses for Passionate Love & White Roses for Pure Souls
+            </p>
+            <div class="flex justify-center items-center gap-3 text-4xl md:text-5xl py-4 flex-wrap">
+                <span class="animate-pulse">🌹</span>
+                <span>🤍</span>
+                <span class="animate-pulse">🌹</span>
+                <span>🤍</span>
+                <span class="animate-pulse">🌹</span>
+                <span>🤍</span>
+                <span class="animate-pulse">🌹</span>
+            </div>
+            <div class="mt-4 inline-block bg-pink-950/50 border border-pink-500/30 px-6 py-2 rounded-full text-pink-200 text-sm font-medium">
+                Bouquet of Eternal Red & White Roses 💐✨
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-8 border-t border-pink-500/20 text-pink-400/70 text-sm">
+            <p data-en="Created with infinite love for Hannan & Madiha 🤍" data-ur="حنان اور مدیحہ کی لامتناهی محبت کے لیے تخلیق کیا گیا 🤍">Created with infinite love for Hannan & Madiha 🤍</p>
+            <p class="mt-1 text-xs" data-en="Bound by Destiny. United by Heart. Since 21 Nov 2022." data-ur="مقدر کا بندھن۔ دل سے اتحاد۔ 21 نومبر 2022 سے۔">Bound by Destiny. United by Heart. Since 21 Nov 2022.</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for Interactivity, Counter, Audio, Petals, and Form Toast -->
+    <script>
+        // 1. Falling Rose Petals Generator
+        const petalsContainer = document.getElementById('petals-container');
+        const petalEmojis = ['🌹', '❤️', '🌸', '✨', '💖'];
+        
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            petal.style.fontSize = (Math.random() * 14 + 12) + 'px';
+            petal.innerHTML = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+            petalsContainer.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+        setInterval(createPetal, 400);
+
+        // 2. Live Love Counter (Since November 21, 2022)
+        const startDate = new Date("November 21, 2022 00:00:00").getTime();
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // 3. Background Qawwali Audio Toggle
+        const audio = document.getElementById('bg-qawwali');
+        const audioToggleBtn = document.getElementById('audio-toggle-btn');
+        const audioIcon = document.getElementById('audio-icon');
+        let isPlaying = false;
+
+        audioToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                audioIcon.className = "fa-solid fa-music";
+                audioToggleBtn.classList.add("animate-pulse");
+                isPlaying = false;
+            } else {
+                audio.play().then(() => {
+                    audioIcon.className = "fa-solid fa-volume-high";
+                    audioToggleBtn.classList.remove("animate-pulse");
+                    isPlaying = true;
+                }).catch(e => {
+                    console.log("Audio autoplay prevented by browser:", e);
+                });
+            }
+        });
+
+        // Auto attempt play on first user interaction anywhere
+        document.body.addEventListener('click', function initAudio() {
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    audioIcon.className = "fa-solid fa-volume-high";
+                    audioToggleBtn.classList.remove("animate-pulse");
+                    isPlaying = true;
+                }).catch(e => {});
+            }
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+
+        // 4. Mystery Gift Box 1 Interaction (Nested layers)
+        const giftContainer = document.getElementById('gift-container');
+        const layer1 = document.getElementById('gift-layer-1');
+        const layer2 = document.getElementById('gift-layer-2');
+        const layer3 = document.getElementById('gift-layer-3');
+        let giftClickCount = 0;
+
+        giftContainer.addEventListener('click', () => {
+            giftClickCount++;
+            if (giftClickCount === 1) {
+                layer1.classList.add('hidden');
+                layer2.classList.remove('hidden');
+                layer2.classList.add('flex');
+            } else if (giftClickCount === 2) {
+                layer2.classList.add('hidden');
+                layer3.classList.remove('hidden');
+                layer3.classList.add('flex');
+            }
+        });
+
+        // 5. Mystery Gift Box 2 (End Surprise)
+        const endGiftBox = document.getElementById('end-gift-box');
+        const endWrapped = document.getElementById('end-gift-wrapped');
+        const endRevealed = document.getElementById('end-gift-revealed');
+
+        endGiftBox.addEventListener('click', () => {
+            endWrapped.classList.add('hidden');
+            endRevealed.classList.remove('hidden');
+            endRevealed.classList.add('flex');
+        });
+
+        // 6. Language Toggle (English / Urdu switcher)
+        const langToggleBtn = document.getElementById('lang-toggle-btn');
+        let currentLang = 'en';
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ur' : 'en';
+            const translatableElements = document.querySelectorAll('[data-en]');
+            
+            translatableElements.forEach(el => {
+                if (currentLang === 'ur') {
+                    if (el.tagName === 'TEXTAREA') {
+                        el.placeholder = "اپنا پیارا سا پیغام یہاں لکھیں...";
+                    } else {
+                        el.innerText = el.getAttribute('data-ur');
+                    }
+                    el.classList.add('urdu-text');
+                } else {
+                    if (el.tagName === 'TEXTAREA') {
+                        el.placeholder = "Write your lovely message here...";
+                    } else {
+                        el.innerText = el.getAttribute('data-en');
+                    }
+                    el.classList.remove('urdu-text');
+                }
+            });
+        });
+
+        // 7. Send Message to Your Heart Interaction
+        const sendHeartBtn = document.getElementById('send-heart-btn');
+        const heartMessageInput = document.getElementById('heart-message-input');
+        const heartToast = document.getElementById('heart-toast');
+        const toastText = document.getElementById('toast-text');
+
+        sendHeartBtn.addEventListener('click', () => {
+            const msg = heartMessageInput.value.trim();
+            if (!msg) {
+                toastText.innerText = currentLang === 'ur' ? "براہ کرم پہلے کچھ لکھیں! ❤️" : "Please write a message first! ❤️";
+            } else {
+                toastText.innerText = currentLang === 'ur' ? "پیغام آپ کے دل میں پہنچ گیا! ❤️" : "Message sent in your heart! ❤️";
+                heartMessageInput.value = '';
+            }
+            heartToast.classList.remove('hidden');
+            setTimeout(() => {
+                heartToast.classList.add('hidden');
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
